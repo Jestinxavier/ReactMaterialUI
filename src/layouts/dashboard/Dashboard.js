@@ -9,7 +9,7 @@ function Dashboard() {
   const theme = useTheme();
   return (
     <>
-      <Navbar open={open} setOpen={setOpen} />
+      {/* <Navbar open={open} setOpen={setOpen} /> */}
       <Box
         component="main"
         sx={{

@@ -14,7 +14,10 @@ export default function Index() {
   const routes = useRoutes([
     {
       path: "/",
-      element: <LandingPage />,
+      element: <Dashboard />,
+      children: [
+      { path: "", element: <Navigate to="/dashboard/app" /> },
+      ]
     },
     { path: "/auth/login", element: <Login /> },
     { path: "/auth/register", element: <Register /> },
@@ -26,7 +29,6 @@ export default function Index() {
         { path: "app", element: <App /> },
         { path: "new", element: <NewSubmssion /> },
         { path: "submission", element: <Submssion /> },
-        { path: "userprofile", element: <UserProfile /> },
         { path: "settings", element: <Settings /> },
       ],
     },
@@ -44,5 +46,4 @@ const Dashboard = Loadable(
 const App = Loadable(lazy(() => import("../pages/dashboard/App")));
 const NewSubmssion = Loadable(lazy(() => import("../pages/dashboard/NewSubmission")));
 const Submssion = Loadable(lazy(() => import("../pages/dashboard/Submissions")));
-const UserProfile = Loadable(lazy(() => import("../pages/dashboard/UserProfile")));
 const Settings = Loadable(lazy(() => import("../pages/dashboard/Settings")));
