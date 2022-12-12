@@ -7,6 +7,10 @@ import {
   styled,
   Card,
   useTheme,
+  Button,
+  Paper,
+  Avatar,
+  Stack,
 } from "@mui/material";
 import theme from "../../theme";
 import React, { useState } from "react";
@@ -16,102 +20,114 @@ import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { backgroundColor } from "../../theme/background";
 import Viegraph from "../../layouts/dashboard/feed/Viegraph";
+import DataTable from "../../components/Dashboard/DataTable";
+
 const StyledToolbar = styled(TextField)({
   borderRadius: "30px",
 });
+
 function App() {
   const [themeColor, setthemeColor] = useState(backgroundColor);
-  const  theme  = useTheme();
-  console.log(theme,'theme');
-  const [first, setfirst] = useState([
-    {
-      name: "Listed Documents",
-      icon: (
-        <TextSnippetIcon
-          sx={{ color: 'primary.light', minWidth: "52px", minHeight: "52px" }}
-        />
-      ),
-      value: 3,
-    },
-    {
-      name: "Status Of Document",
-      icon: (
-        <PendingActionsIcon
-          sx={{ color: themeColor, minWidth: "52px", minHeight: "52px" }}
-        />
-      ),
-      value: 30,
-    },
-    {
-      name: "Most Viewed",
-      icon: (
-        <RemoveRedEyeIcon
-          sx={{ color: themeColor, minWidth: "52px", minHeight: "52px" }}
-        />
-      ),
-      value: 30,
-    },
-    {
-      name: "Rejected Document",
-      icon: (
-        <CancelPresentationIcon
-          sx={{ color: themeColor, minWidth: "52px", minHeight: "52px" }}
-        />
-      ),
-      value: 30,
-    },
-  ]);
+  const theme = useTheme();
   return (
     <Box bgcolor="#fdfdfd" flex={4} p={2}>
-      <Typography variant="h5" color="initial">
-        Dashboard
-      </Typography>
-      <Divider sx={{ m: 0.5 }} orientation="horizontal" />
-      <Grid container>
-        {first.map((item, i) => {
-          return (
-            <Grid display={{ md: "block" }} md={3} item>
-              <Card
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  m: 2,
-                  justifyContent: "center",
-                  padding: "20px",
-                }}
+      <Grid spacing={3} container justifyContent="space-between" mt={10} mb={10}>
+        <Grid display={{ md: "block" }} md={5} item>
+          <Card
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              m: 2,
+              justifyContent: "center",
+              padding: "20px",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <TextSnippetIcon
+                sx={{ color: "red", minWidth: "52px", minHeight: "52px" }}
+              />
+              <Typography
+              sx={{
+                display: "flex",
+                justifyContent: "start",
+                fontWeight: "bold",
+                fontSize: 21,
+              }}
+            >
+               react-apexcharts pending
+            </Typography>
+               
+
+              
+            </Box>
+          </Card>
+          {/* <Viegraph /> */}
+        </Grid>
+        <Grid display={{ md: "block" }} md={7} item>
+          <Paper
+            elevation={12}
+            sx={{
+              padding: "20px",
+            }}
+          >
+            <Typography
+              sx={{
+                display: "flex",
+                justifyContent: "start",
+                fontWeight: "bold",
+                fontSize: 21,
+              }}
+            >
+              Add Collaborataors
+            </Typography>
+            {/* <Box  display="flex"  flexDirection='row' alignItems="center" justifyContent="space-between" > */}
+            <Grid container spacing={3}>
+              <Grid display={{ md: "block" }} md={10} item>
+                <TextField
+                  id="full-width-text-field"
+                  label="Email"
+                  placeholder="Enter email"
+                  margin="normal"
+                  fullWidth // this may override your custom width
+                />
+              </Grid>
+              <Grid
+                display={{ md: "flex" }}
+                flexDirection="column"
+                alignItems="flex-end"
+                justifyContent="center"
+                md={2}
+                item
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
+                <Button
+                  style={{
+                    borderRadius: 3,
+                    backgroundColor: "#00bcd3",
                   }}
+                  px={3}
+                  variant="contained"
+                  size="small"
                 >
-                  {/* <TextSnippetIcon sx={{color :"red",    minWidth: "52px",minHeight: "52px"}} /> */}
-                  {item.icon}
-                  <Box sx={{ mt: 3 }}>
-                    <Typography
-                      sx={{ display: "flex", justifyContent: "center" }}
-                    >
-                      {item.value}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        fontFamily: "inherit",
-                      }}
-                    >
-                      {item.name}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Card>
-              {/* <Viegraph /> */}
+                  Create
+                </Button>
+              </Grid>
             </Grid>
-          );
-        })}
+            {/* </Box> */}
+          </Paper>
+          {/* <Viegraph /> */}
+        </Grid>
       </Grid>
+      {/* <Grid spacing={3} container justifyContent="space-between" mt={30}> */}
+      <Paper elevation={12}>
+        <DataTable />
+      </Paper>
+      {/* </Grid> */}
     </Box>
   );
 }

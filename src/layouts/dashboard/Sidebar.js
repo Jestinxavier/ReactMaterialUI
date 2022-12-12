@@ -26,6 +26,8 @@ import {
   Settings,
   Store,
   Visibility,
+  SmsOutlined,
+  DoorbellOutlined, 
 } from "@mui/icons-material";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
@@ -82,15 +84,13 @@ function Sidebar({ open, setOpen }) {
   const theme = useTheme();
   const { pathname } = useLocation();
   const [menudata, setMenudata] = useState([
-    { name: "Dashboard", icon: <Home />, link: "/dashboard/app" },
+    { name: "Home", icon: <Home />, link: "/dashboard/app" },
     {
-      name: "New Submission",
-      icon: <AddCircleOutline />,
+      name: "Notification",
+      icon: <SmsOutlined />,
       link: "/dashboard/new",
     },
-    { name: "Submissions", icon: <LayersSharp />, link: "/dashboard/submission" },
-    { name: "Profile", icon: <PeopleAlt />, link: "/dashboard/userprofile" },
-    { name: "Settings", icon: <Settings />, link: "/dashboard/settings" },
+    { name: "Chat", icon: <DoorbellOutlined />, link: "/dashboard/submission" },
   ]);
   // const [tabValue, setTabValue] = useState(1)
   return (
@@ -127,14 +127,14 @@ function Sidebar({ open, setOpen }) {
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItem>
+        {/* <ListItem>
           <ListItemButton component="a" href="#" sx={{ borderRadius: "30px" }}>
             <ListItemIcon>
               <ModeNight />
             </ListItemIcon>
             <Switch />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
       </List>
     </Drawer>
   );
