@@ -6,6 +6,9 @@ import LocalStorageProvider from "./contexts/LocalStorageProvider";
 import AuthProvider from "./contexts/AuthProvider";
 
 function App() {
+
+  
+ 
   return (
     <BrowserRouter>
       <ThemeContext>
