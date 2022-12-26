@@ -20,7 +20,7 @@ export default function Index() {
       ]
     },
     { path: "/auth/login", element: <Login /> },
-    { path: "/auth/register", element: <Register /> },
+    { path: "/auth/register/:id", element: <Register /> },
     {
       path: "/dashboard",
       element: <Dashboard />,

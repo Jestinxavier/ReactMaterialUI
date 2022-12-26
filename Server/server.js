@@ -17,6 +17,7 @@ const fastify = require('fastify')({
     logger: true
   })
   fastify.register(require('fastify-cors'), { 
+    
     // put your options here
   })
   routes.map(route => fastify.route(route)) //route is reg to fastify

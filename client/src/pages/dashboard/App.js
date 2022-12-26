@@ -13,7 +13,7 @@ import {
   Stack,
 } from "@mui/material";
 import theme from "../../theme";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
@@ -21,12 +21,30 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { backgroundColor } from "../../theme/background";
 import Viegraph from "../../layouts/dashboard/feed/Viegraph";
 import DataTable from "../../components/Dashboard/DataTable";
+import axios from '../../axios'
+import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
+import { Form, FormikProvider, useFormik } from "formik";
 
 const StyledToolbar = styled(TextField)({
   borderRadius: "30px",
 });
 
 function App() {
+  const [email, setEmail] = useState()
+  const handleTriggrer =()=>{
+    axios.post('/users', {
+      userMail: email
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  useEffect(() => {
+   
+  }, [])
   const [themeColor, setthemeColor] = useState(backgroundColor);
   const theme = useTheme();
   return (
@@ -88,6 +106,7 @@ function App() {
             </Typography>
             {/* <Box  display="flex"  flexDirection='row' alignItems="center" justifyContent="space-between" > */}
             <Grid container spacing={3}>
+              
               <Grid display={{ md: "block" }} md={10} item>
                 <TextField
                   id="full-width-text-field"
@@ -95,6 +114,9 @@ function App() {
                   placeholder="Enter email"
                   margin="normal"
                   fullWidth // this may override your custom width
+                  onChange={(e)=>{
+                    setEmail(e.target.value)
+                  }}
                 />
               </Grid>
               <Grid
@@ -113,6 +135,7 @@ function App() {
                   px={3}
                   variant="contained"
                   size="small"
+                  onClick={()=>{handleTriggrer()}}
                 >
                   Create
                 </Button>

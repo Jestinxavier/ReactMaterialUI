@@ -19,6 +19,7 @@ const Notes = sequelize.define("Notes", {
   status: {
     type: Sequelize.NUMBER,
   },
+  
 });
 
 // `sequelize.define` also returns the model

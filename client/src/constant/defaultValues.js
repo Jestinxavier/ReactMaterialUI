@@ -1,4 +1,4 @@
-export const appName='IJ-SPER'
+export const appName='Jes'
 
 export const contry = [ 
     {name: 'Afghanistan', code: 'AF'}, 

@@ -1,67 +1,59 @@
 const { name } = require("../modal/indexmodal");
-const { Addnote,getAllNoteData,getNoteById,updateDataById,deleteDataById } = require("../modal/notesModal");
+const {
+  UpdateMail,
+  Usertable,
+  idValidater,
+  statusChainge,
+  updateUserData,
+  emailValidater,
+  updateData,
+} = require("../modal/Usermodal");
+const { sentmail } = require("./NodeMailer");
 
-const addNotes = async (req, reply) => {
-  
-  let upload = await Addnote(req.body.Datas);
+const addUser = async (req, reply) => {
+  let resultData = await UpdateMail(req.body.userMail);
+  console.log(resultData.uniqId, "resultData.uniqId");
+  let mailstatus = await sentmail(req.body.userMail, resultData.uniqId);
+  reply.send({
+    status: 1,
+    msg: "fetched all data by id",
+  });
+};
+const adduserData = async (req, reply) => {
+  let userEmail = req.body.email;
 
-  if (upload) {
-    return {
-      msg: "updated successfully",
-      status: 1,
-    };
+  let email = await emailValidater(userEmail);
+  if (email) {
+    let updateDatas = await updateData(req.body);
   } else {
-    return {
-      msg: "updated not successfully",
-      status: 0,
-    };
+    let resultData = await updateUserData(req.body);
   }
+
+  reply.send({
+    status: 1,
+    msg: "fetched all data by id",
+  });
 };
-const getallNotes = async (req, reply) => {
-  let upload = await getAllNoteData();
- reply.send({
-  data:upload,
-  status: 1,
-  msg:'fetched all data'
- })
-  
-};
-const getId = async (req, reply) => {
-let id = req.params;
-  let upload = await getNoteById(id);
-  // let Notedata = Object.values(upload)
- reply.send({
-  data:upload,
-  status: 1,
-  msg:'fetched all data by id'
- })
-  
-};
-const updateId = async (req, reply) => {
-let id = req.params;
-  let upload = await updateDataById(id,req.body.Datas);
-  // let Notedata = Object.values(upload)
- reply.send({
-  data:upload,
-  msg:'Updated sucessfull'
- })
-  
-};
-const deleteId = async (req, reply) => {
-let id = req.params;
-  let upload = await deleteDataById(id);
-  // let Notedata = Object.values(upload)
- reply.send({
-  data:upload,
-  msg:'Updated sucessfull'
- })
-  
+
+const unicqIdChecker = async (req, reply) => {
+  let id = req.body.userid;
+  let response = await idValidater(id);
+  if (response.status == "1") {
+    let statusValidater = await statusChainge(response.uuid);
+    reply.send({
+      status: statusValidater,
+      msg: "sigup page",
+    });
+  } else {
+    reply.send({
+      status: false,
+      msg: "sigup page",
+    });
+  }
 };
 
 module.exports = {
-  deleteId,
-  updateId,
-  getId,
-  getallNotes,
-  addNotes,
+  addUser,
+  unicqIdChecker,
+  adduserData,
 };
